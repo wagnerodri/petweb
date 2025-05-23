@@ -1,0 +1,806 @@
+/* ---------- Topo ---------- */
+.topo {
+  background: #f9f9f9;
+  border-bottom: 1px solid #e1e1e1;
+  padding: 5px 3vw 0; /* diminui padding top e lateral */
+}
+
+.linha-topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* logo à esquerda / redes à direita */
+}
+
+.logo-topo img {
+  width: 140px;
+  height: auto;
+}
+
+.social-links {
+  display: flex;
+  gap: 15px; /* diminui gap entre ícones sociais */
+}
+
+.social-links a {
+  font-size: 1.4rem;
+  color: #2a9d8f;
+  transition: transform 0.25s;
+}
+
+.social-links a:hover {
+  transform: scale(1.15);
+}
+
+#btn-menu {
+  /* botão hambúrguer continua */
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+/* --- Navegação --- */
+#nav-principal ul {
+  list-style: none;
+  display: flex;
+  gap: 20px; /* diminui espaçamento do menu */
+  justify-content: center;
+  padding: 8px 0 12px; /* diminui padding superior e inferior */
+}
+
+#nav-principal a {
+  font-weight: 600;
+  text-decoration: none;
+  color: #222;
+  position: relative;
+}
+
+#nav-principal a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: #2a9d8f;
+  transition: width 0.3s;
+}
+
+#nav-principal a:hover::after {
+  width: 100%;
+}
+
+/* ---------- HERO ---------- */
+.hero {
+  height: 100vh; /* ocupa tela cheia */
+  background: url('./fundo1.jpeg') center/cover fixed; /* troque a imagem */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::after {
+  /* overlay escuro para contraste */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.hero-conteudo {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  padding: 0 8vw;
+  animation: fadeUp 0.9s ease-out 0.2s both;
+}
+
+.hero h1 {
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  margin-bottom: 12px;
+}
+
+.hero p {
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+}
+
+/* ---------- Animação fade/slide nas seções ---------- */
+.secao-animada {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: 0.7s ease-out;
+}
+
+.secao-animada.visivel {
+  opacity: 1;
+  transform: none;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- RESPONSIVO ---------- */
+@media (max-width: 768px) {
+  #btn-menu {
+    display: block;
+  }
+
+  /* menu colapsável */
+  #nav-principal {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+  }
+
+  #nav-principal ul {
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  #nav-principal.aberto {
+    max-height: 320px;
+  }
+
+  /* redes sociais em mobile: encostar no topo p/ não quebrar layout */
+  .social-links {
+    gap: 16px;
+  }
+}
+
+
+/****************************************************/
+
+/** * FALE CONOSCO DENTRO DA IMAGEM ABAIXO DO MENU */
+
+.btn-fale-conosco {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+  padding: 12px 28px;
+  border: 2px solid #25d366;       /* borda verde */
+  border-radius: 30px;             /* bordas arredondadas */
+  background-color: transparent;  /* fundo transparente */
+  color: #29dd56;
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 0 0 rgba(30, 234, 105, 0); /* sem sombra inicial */
+}
+
+.btn-fale-conosco i {
+  font-size: 22px;
+}
+
+/* Animação no hover: fundo verde, texto branco, sombra leve */
+.btn-fale-conosco:hover {
+  background-color: #25d366;
+  color: white;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.5);
+}
+
+/* --- título Quem Somos --- */
+.qs-title{
+  --cor-linha:#2a9d8f;
+  --altura:4px;
+
+  position:relative;
+  display:flex;          /* mantém o span centralizado */
+  justify-content:center;
+  margin:60px 0 40px;
+  overflow:hidden;       /* esconde a animação fora do box */
+}
+
+.qs-title::before,
+.qs-title::after{
+  content:"";
+  flex:1;                         /* cada lado cresce igualmente */
+  height:var(--altura);
+  background:var(--cor-linha);
+  align-self:center;              /* alinha na vertical ao meio */
+  opacity:0;                      /* invisível antes da animação */
+  transform:scaleX(0);
+  transition:transform .6s ease, opacity .3s ease;
+}
+
+/* texto */
+.qs-title > span{
+  padding:0 24px;
+  font-size:clamp(1.6rem,4vw,2.2rem);
+  font-weight:700;
+  color:var(--cor-linha);
+  position:relative;
+  z-index:1;
+  white-space:nowrap;
+  opacity:0;
+  transform:translateY(40%);
+  transition:opacity .6s ease .2s, transform .6s ease .2s;
+}
+
+/* estado visível (adicionado por JS ou :is CSS) */
+.qs-title.visivel::before,
+.qs-title.visivel::after{
+  opacity:1;
+  transform:scaleX(1);
+}
+.qs-title.visivel > span{
+  opacity:1;
+  transform:none;
+}
+
+/* dark-mode opcional */
+@media (prefers-color-scheme:dark){
+  .qs-title{ --cor-linha:#74d4c8; }
+}
+
+
+
+
+/*** quem somos */
+.quem-somos-container {
+  position: relative;
+  background: url('./dog-gat.jpg') center center / cover no-repeat fixed;
+  padding: 60px 20px;
+  max-width: 1000px;
+  margin: 40px auto;
+  border-radius: 12px;
+  color: white;
+  overflow: hidden;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.8); /* começa escuro */
+  transition: background 0.3s ease;
+  pointer-events: none;
+  border-radius: 12px;
+  z-index: 1;
+}
+
+.texto-quem-somos {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  margin: 0 auto;
+  font-size: 18px;
+  line-height: 1.8;
+  text-align: justify;
+  color: rgb(17, 17, 17);
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .quem-somos-container {
+    padding: 40px 15px;
+  }
+
+  .texto-quem-somos {
+    font-size: 16px;
+  }
+}
+
+
+/*********************************************/
+
+/**** IMAGEM ABAIXO QUEM SOMOS */
+/* ===== COMO TRABALHAMOS – galeria circular com legendas ===== */
+.como-trabalhamos{
+  margin:60px auto;
+  padding:0 5vw;              /* respiro lateral */
+  max-width:1000px;
+  text-align:center;
+}
+
+/* contêiner flex para alinhar as figuras */
+.carrossel-imagens{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:30px;
+}
+
+/* cada figura (imagem + legenda) */
+.carrossel-imagens figure{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  width:160px;               /* controla largura do bloco */
+}
+
+.carrossel-imagens img{
+  width:160px;
+  height:160px;
+  object-fit:cover;
+  border-radius:50%;
+  box-shadow:0 4px 15px rgba(0,0,0,.1);
+  transition:transform .45s;
+}
+
+.carrossel-imagens img:hover{
+  transform:scale(1.08);
+}
+
+/* legenda */
+.carrossel-imagens figcaption{
+  margin-top:8px;
+  font-size:0.95rem;
+  color:#333;
+  font-weight:600;
+}
+
+/* — responsivo — */
+@media (max-width:768px){
+  .carrossel-imagens figure,
+  .carrossel-imagens img{
+    width:120px;
+    height:120px;
+  }
+}
+
+@media (max-width:480px){
+  .carrossel-imagens figure,
+  .carrossel-imagens img{
+    width:100px;
+    height:100px;
+  }
+}
+
+
+
+  /***********************************************/
+
+  /* FALE CONOSCO */
+
+
+/* Contêiner externo */
+.centralizador {
+  display: flex;
+  justify-content: flex-start;   /* Alinhar à esquerda */
+  padding-left: 150px;            /* Espaço grande à esquerda */
+  padding-right: 20px;
+  box-sizing: border-box;
+}
+
+/* Bloco dos botões */
+.botoes-contato {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  max-width: 1100px;
+}
+
+/* Botão base */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: white;
+  padding: 14px 24px;
+  font-size: 18px;
+  border-radius: 6px;
+  min-width: 200px;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* Cores */
+.btn-whatsapp { background-color: #25d366; }
+.btn-whatsapp:hover { background-color: #1ebe57; }
+
+.btn-telefone { background-color: #0077cc; }
+.btn-telefone:hover { background-color: #005fa3; }
+
+.btn-facebook { background-color: #1877F2; }
+.btn-facebook:hover { background-color: #145dbf; }
+
+.btn-instagram { background-color: #E4405F; }
+.btn-instagram:hover { background-color: #bf3850; }
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .centralizador {
+    padding: 0 20px;
+    justify-content: center;
+  }
+
+  .btn {
+    width: 100%;
+    font-size: 20px;
+  }
+}
+
+  
+  /*********************************************************/
+  
+
+  /*  SERVIÇOS */
+
+  .servicos {
+    background-color: #f8f8f8;
+    padding: 60px 20px;
+    text-align: center;
+  }
+  
+  .container-servicos {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  
+  .servicos h2 {
+    font-size: 32px;
+    color: #2a9d8f;
+    margin-bottom: 40px;
+  }
+  
+  .cards-servicos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+  }
+  
+  .card-servico {
+    background-color: white;
+    padding: 30px 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+  }
+  
+  .card-servico:hover {
+    transform: translateY(-5px);
+  }
+  
+  .card-servico i {
+    font-size: 40px;
+    color: #2a9d8f;
+    margin-bottom: 15px;
+  }
+  
+  .card-servico h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .card-servico p {
+    font-size: 16px;
+    color: #666;
+  }
+
+  
+  /* ***************************************************/
+
+  /* CAIXA DE SGUESTAO */
+
+  .sugestoes {
+    background-color: #fff;
+    padding: 60px 20px;
+    text-align: center;
+  }
+  
+  .container-sugestoes {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .sugestoes h2 {
+    font-size: 32px;
+    color: #2a9d8f;
+    margin-bottom: 10px;
+  }
+  
+  .sugestoes p {
+    font-size: 16px;
+    margin-bottom: 30px;
+    color: #555;
+  }
+  
+  #form-sugestao textarea {
+    width: 100%;
+    height: 120px;
+    padding: 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    resize: none;
+    margin-bottom: 20px;
+  }
+  
+  #form-sugestao button {
+    background-color: #2a9d8f;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  #form-sugestao button:hover {
+    background-color: #21867a;
+  }
+  
+  .comentarios {
+    margin-top: 30px;
+    text-align: left;
+  }
+  
+  .comentario {
+    background-color: #f1f1f1;
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+  }
+  
+  /*****************************************************/
+
+
+  /* galeria de fotos */
+
+
+  /* --- Galeria de Fotos --- */
+.galeria {
+  background-color: #f9f9f9;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.galeria h2 {
+  font-size: 32px;
+  color: #2a9d8f;
+  margin-bottom: 30px;
+}
+
+.galeria-container {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.galeria-slider {
+  display: flex;
+  gap: 20px;
+  transition: transform 0.5s ease;
+  scroll-behavior: smooth;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  scroll-snap-type: x mandatory;
+}
+
+.galeria-slider::-webkit-scrollbar {
+  display: none;
+}
+
+.galeria-slider img {
+  scroll-snap-align: center;
+  min-width: 300px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.6s forwards;
+}
+
+/* Animação em sequência */
+.galeria-slider img:nth-child(1) { animation-delay: 0.2s; }
+.galeria-slider img:nth-child(2) { animation-delay: 0.4s; }
+.galeria-slider img:nth-child(3) { animation-delay: 0.6s; }
+.galeria-slider img:nth-child(4) { animation-delay: 0.8s; }
+.galeria-slider img:nth-child(5) { animation-delay: 1s; }
+.galeria-slider img:nth-child(6) { animation-delay: 1.2s; }
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.seta {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #fff;
+  color: #2a9d8f;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  padding: 10px 14px;
+  border-radius: 50%;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  z-index: 2;
+  transition: background-color 0.3s;
+}
+
+.seta:hover {
+  background-color: #e1f3f3;
+}
+
+.seta-esquerda {
+  left: 10px;
+}
+
+.seta-direita {
+  right: 10px;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .galeria-slider img {
+    min-width: 240px;
+    height: 160px;
+  }
+}
+
+
+/* SOCIOS OU PATRICIONADORES */
+
+.patrocinadores {
+  background-color: #f1f1f1;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.patrocinadores h2 {
+  font-size: 28px;
+  color: #2a9d8f;
+  margin-bottom: 30px;
+}
+
+.patrocinadores-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.patrocinadores-container img {
+  height: 80px;
+  max-width: 160px;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.patrocinadores-container img:hover {
+  transform: scale(1.05);
+}
+
+/* Responsivo para telas pequenas */
+@media (max-width: 768px) {
+  .patrocinadores-container {
+    flex-direction: column;
+  }
+
+  .patrocinadores-container img {
+    height: 60px;
+    max-width: 140px;
+  }
+}
+
+
+
+
+
+/* ************* RODAPÉ ********/
+
+/* ---------- Rodapé geral ---------- */
+.footer{
+  background:#222;          /* cor padrão */
+  color:#eee;
+  font-size:15px;
+}
+.footer a{ color:inherit; text-decoration:none; }
+.footer h3{ font-size:17px; margin-bottom:10px; color:#2a9d8f; }
+
+/* layout mobile first: tudo empilhado */
+.footer-container{
+  max-width:1200px;
+  margin:auto;
+  padding:40px 6vw;
+  display:grid;
+  gap:28px;
+}
+
+/* logo */
+.footer-logo img{ width:150px; height:auto; }
+
+/* menu */
+.footer-nav ul{ list-style:none; padding:0; }
+.footer-nav li + li{ margin-top:6px; }       /* espaçamento entre links */
+.footer-nav a:hover{ text-decoration:underline; }
+
+/* botões sociais */
+.btn-social{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:#333;
+  padding:10px 16px;
+  border-radius:6px;
+  margin:6px 6px 0 0;
+  transition:background .25s;
+  font-weight:500;
+}
+.btn-social.whatsapp{ background:#25d366; }
+.btn-social.telefone{ background:#0077cc; }
+.btn-social.instagram{ background:#d93175; }
+.btn-social.facebook{ background:#3b5998; }
+
+.btn-social:hover{ filter:brightness(1.1); }
+
+/* pagamentos: ícones alinhados */
+.footer-pagamentos p{ margin:6px 0; }
+
+/* linha final */
+.footer-bottom{
+  text-align:center;
+  padding:14px 10px;
+  background:#111;
+  font-size:14px;
+}
+
+/* ---------- Responsivo ≥ 768px ---------- */
+@media(min-width:768px){
+  /* 4 colunas no desktop */
+  .footer-container{
+    grid-template-columns:repeat(4,1fr);
+    align-items:flex-start;
+  }
+
+  /* centraliza texto em colunas (se quiser) */
+  .footer-logo, .footer-nav, .footer-contatos, .footer-pagamentos{
+    text-align:center;
+  }
+}
+
+
+/*******************************/
+
+
+/* MAPA */
+/* --- bloco endereço --- */
+.footer-endereco{
+  max-width:300px;              /* mesmo feeling dos outros blocos */
+}
+
+.footer-endereco .mapa-wrapper{
+  margin-top:12px;
+  border-radius:8px;
+  overflow:hidden;              /* deixa cantos arredondados */
+}
+
+.footer-endereco iframe{
+  width:100%;
+  height:200px;                 /* pode aumentar se quiser */
+  border:0;
+}
+
+/* responsivo: reduz altura em telas menores */
+@media(max-width:768px){
+  .footer-endereco iframe{ height:180px; }
+}

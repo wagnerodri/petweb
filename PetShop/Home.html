@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Escola Pet</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js"></script>
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
+
+</head>
+<body>
+<!-- =======  TOPO  ======= -->
+<header class="topo">
+  <!-- overlay apenas visual -->
+  <div class="topo-overlay"></div>
+
+  <div class="linha-topo">
+    <!-- Logo -->
+    <div class="logo-topo">
+      <img src="Logo1.0.jpg" alt="Escola Pet">
+    </div>
+
+    <!-- Redes sociais -->
+    <nav class="social-links">
+      <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://facebook.com"  target="_blank"><i class="fab fa-facebook"></i></a>
+      <a href="https://wa.me/55XXXXXXXXXXX" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    </nav>
+
+    <!-- Botão hambúrguer (aparece apenas em telas pequenas) -->
+    <button id="btn-menu"><i class="fas fa-bars"></i></button>
+  </div>
+
+  <!-- Navegação principal -->
+  <nav id="nav-principal">
+    <ul>
+      <li><a href="#inicio">Início</a></li>
+      <li><a href="#quemsomos">Quem Somos</a></li>
+      <li><a href="#servicos">Serviços</a></li>
+      <li><a href="#galeria">Galeria</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- JS HANBUGER-->
+ <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const btn  = document.getElementById("btn-menu");
+  const nav  = document.getElementById("nav-principal");
+
+  btn.addEventListener("click", () => {
+    nav.classList.toggle("aberto");        // abre/fecha
+  });
+
+  /* fecha menu ao clicar num link (mobile) */
+  nav.querySelectorAll("a").forEach(link=>{
+    link.addEventListener("click", () => nav.classList.remove("aberto"));
+  });
+});
+</script>
+
+
+
+<section class="hero" id="inicio">
+  <div class="hero-conteudo">
+    <h1>Transforme a Vida do Seu Pet!</h1>
+    <p>Carinho, educação e bem-estar em um só lugar.</p>
+
+    <a href="https://wa.me/55XXXXXXXXXXX" target="_blank" class="btn-fale-conosco">
+      <i class="fab fa-whatsapp"></i> Fale Conosco
+    </a>
+  </div>
+</section>
+
+
+  <!--*******************************ABAIXO QUEM SOMOS **************************-->
+<br> <br>
+
+<!--MARGEN DO TITULO-->
+<h2 class="qs-title" id="quemsomos-titulo">
+  <span>Quem&nbsp;Somos</span>
+</h2>
+
+
+<!-- JS DO TITULO-->
+ <script>
+document.addEventListener("DOMContentLoaded",()=>{
+  const obs = new IntersectionObserver((ents)=>{
+    ents.forEach(ent=>{
+      if(ent.isIntersecting){
+        ent.target.classList.add("visivel");
+        obs.unobserve(ent.target);      // anima só 1 vez
+      }
+    });
+  },{threshold:0.4});                   // 40% visível dispara
+
+  document.querySelectorAll(".qs-title").forEach(el=>obs.observe(el));
+});
+</script>
+
+
+
+
+<!--************************************** TEXTO ****************-->
+<div class="quem-somos-container" id="quemsomos">
+  <div class="overlay"></div>
+  <div class="texto-quem-somos">
+    <p>
+      Na Escola Pet, somos mais do que uma equipe: somos apaixonados por animais e por tudo o que eles representam. Acreditamos que cada pet é único e merece atenção, respeito e muito carinho. Nosso compromisso é oferecer um ambiente seguro, alegre e estimulante, onde o bem-estar físico e emocional dos pets está sempre em primeiro lugar.
+    </p>
+    <p>
+      Trabalhamos com métodos modernos de adestramento, cuidados personalizados e uma rotina pensada para garantir que cada momento aqui seja uma experiência positiva para os animais e seus tutores. Nossa equipe é formada por profissionais experientes e dedicados, que tratam cada pet como se fosse parte da família.
+    </p>
+    <p>
+      Aqui, educar é sinônimo de amar. E é com esse amor que construímos diariamente uma escola onde aprender, brincar e cuidar andam juntos — sempre com responsabilidade, ética e muito afeto.
+    </p>
+  </div>
+</div>
+
+
+<!--ANIMAÇAO-->
+<script>
+  window.addEventListener('scroll', () => {
+    const container = document.getElementById('quemsomos');
+    const overlay = container.querySelector('.overlay');
+    const rect = container.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+
+    // Calcula o quanto o container está visível na tela (de 0 a 1)
+    let visibleRatio = 0;
+
+    if(rect.top < windowHeight && rect.bottom > 0){
+      const visibleHeight = Math.min(rect.bottom, windowHeight) - Math.max(rect.top, 0);
+      visibleRatio = visibleHeight / rect.height;
+    }
+
+    // O overlay vai clareando (menos escuro) conforme o conteúdo aparece
+    // Ajuste o '0.8' para controlar o máximo de opacidade inicial
+    const maxOpacity = 0.8;
+    const newOpacity = maxOpacity * (1 - visibleRatio);
+
+    overlay.style.background = `rgba(0, 0, 0, ${newOpacity.toFixed(2)})`;
+  });
+</script>
+
+
+<!-- ***************************************************-->
+
+<!-- IMAGEM ABAIXO QUEM SOMOS --><br>
+ <h2 class="qs-title" id="quemsomos-titulo">
+  <span>Conheça&nbsp;Equipe</span>
+</h2><br><br>
+
+<div class="carrossel-imagens">
+  <figure>
+    <img src="./Adestrador.jpg" alt="Treino diário">
+    
+    <figcaption>Adestrador</figcaption>
+  </figure>
+
+  <figure>
+    <img src="./banho-tosa.jpeg" alt="Banho e tosa">
+    <figcaption>Banho &amp; Tosa</figcaption>
+  </figure>
+
+  <figure>
+    <img src="./medico-veterinario.webp" alt="Cuidados médicos">
+    <figcaption>Veterinário</figcaption>
+  </figure>
+
+  <figure>
+    <img src="./escola.webp" alt="Creche pet">
+    <figcaption>Creche</figcaption>
+  </figure>
+</div>
+
+
+
+  <!-- ************************************************************-->
+
+  <!--  **********  SERVIÇOS *******************-->
+  <br><br><br>
+<div class="titulo-quem-somos" id="servicos">
+  <h2 class="qs-title" id="quemsomos-titulo">
+  <span>Nosso&nbsp;Serviços</span>
+</h2>
+</div>
+
+      <div class="cards-servicos">
+        <div class="card-servico">
+          <i class="fas fa-dog"></i>
+          <h3>Adestramento</h3>
+          <p>Treinamento especializado para melhorar o comportamento e obediência do seu pet.</p>
+        </div>
+        <div class="card-servico">
+          <i class="fas fa-bath"></i>
+          <h3>Banho e Tosa</h3>
+          <p>Cuidados de higiene e beleza com carinho e profissionais qualificados.</p>
+        </div>
+        <div class="card-servico">
+          <i class="fas fa-stethoscope"></i>
+          <h3>Cuidados Veterinários</h3>
+          <p>Atendimento clínico e preventivo com profissionais experientes.</p>
+        </div>
+        <div class="card-servico">
+          <i class="fas fa-paw"></i>
+          <h3>Creche Pet</h3>
+          <p>Ambiente seguro e divertido para seu pet brincar, socializar e se exercitar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br><br>
+
+  <!---********************************************************************-->
+
+
+  
+
+  <!-- quem somos JS-->
+  <script>
+    // Carrossel de imagens
+    document.addEventListener('DOMContentLoaded', function () {
+      const imagens = [
+        'Adestrador.jpg',
+        'medico-veterinario.webp',
+        'veterinario.jpg',
+        'banho-tosa.jpeg'
+      ];
+  
+      let index = 0;
+      const carrossel = document.getElementById('carrossel');
+  
+      setInterval(() => {
+        index = (index + 1) % imagens.length;
+        carrossel.src = imagens[index];
+      }, 1500); // troca a cada 1.5s
+    });
+  </script>
+  
+
+
+  
+<!-- FIM quem somos JS -->
+
+
+
+
+
+
+<!--MENU -->
+  <!-- Javascript abaixo -->
+  <script>
+    // Espera o DOM carregar totalmente
+    document.addEventListener('DOMContentLoaded', function () {
+      const toggle = document.getElementById("menu-toggle"); // Obtém o ícone do hambúrguer
+      const mobileMenu = document.getElementById("mobile-menu"); // Obtém o menu mobile
+
+      toggle.addEventListener("click", function () {
+        // Alterna a visibilidade do menu mobile
+        mobileMenu.classList.toggle("show");
+      });
+    });
+  </script>
+
+
+<!--- *****************************************************-->
+
+<!--*************  GALERIA DE FOTOS **************-->
+<div class="titulo-quem-somos" id="galeria">
+  <h2 class="qs-title" id="quemsomos-titulo">
+  <span>Momentos&nbsp;com os pets</span>
+</h2>
+</div>
+
+
+  <div class="galeria-container">
+    <button class="seta seta-esquerda">&#10094;</button>
+
+    <div class="galeria-slider" id="galeria-slider">
+      <img src="./Adestrador.jpg" alt="Pet brincando" />
+      <img src="./banho-tosa.jpeg" alt="Banho no pet" />
+      <img src="./escola.webp" alt="Aula de adestramento" />
+      <img src="./fundo1.jpeg" alt="Veterinário atendendo" />
+      <img src="./logo1.jpg" alt="Pets socializando" />
+      <img src="./medico-veterinario.webp" alt="Creche pet" />
+    </div>
+
+    <button class="seta seta-direita">&#10095;</button>
+  </div>
+</section>
+
+
+<!--- JS GALERIA DE FOTOS -->
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const slider = document.getElementById("galeria-slider");
+    const btnEsquerda = document.querySelector(".seta-esquerda");
+    const btnDireita = document.querySelector(".seta-direita");
+
+    const scrollValor = 320;
+
+    btnEsquerda.addEventListener("click", () => {
+      slider.scrollBy({ left: -scrollValor, behavior: "smooth" });
+    });
+
+    btnDireita.addEventListener("click", () => {
+      slider.scrollBy({ left: scrollValor, behavior: "smooth" });
+    });
+  });
+</script>
+
+<!--- FIM GALERIA DE FOTOS -->
+
+  <!-- FALE CONOSOCO-->
+<br><br>
+<section class="fale-conosco" id="contato">
+  <div class="container-fale">
+ <h2 class="qs-title" id="quemsomos-titulo">
+  <span>Fale&nbsp;consoco</span>
+</h2>
+
+<div class="centralizador">
+  <div class="botoes-contato">
+    <a href="#" class="btn btn-whatsapp">WhatsApp</a>
+    <a href="#" class="btn btn-telefone">Telefone</a>
+    <a href="#" class="btn btn-facebook">Facebook</a>
+    <a href="#" class="btn btn-instagram">Instagram</a>
+  </div>
+</div>
+
+   <BR><BR>
+
+
+
+  <!--- SOCIO OU PATRICIONADOR -->
+ <section class="patrocinadores">
+  <div class="titulo-quem-somos">
+  <h2>Parceria e colaboradores</h2>
+</div>
+  <div class="patrocinadores-container">
+    <img src="./parceria-adest.webp" alt="Patrocinador 1" />
+    <img src="./parceria-vete.jpg" alt="Patrocinador 2" />
+    <img src="./parceria-banho.jpg" alt="Patrocinador 3" />
+    <img src="./parceria-hotel.jpg" alt="Patrocinador 4" />
+  </div>
+</section>
+
+
+
+
+  <!-- FIM SOCIO E PATRICIONADORES-->
+
+  <!-- CAIXA DE SUGESTAO -->
+
+  <section class="sugestoes" id="sugestoes">
+    <div class="container-sugestoes">
+      <h2>Caixa de Sugestões</h2>
+      <p>Deixe seu comentário, elogio ou sugestão para melhorarmos nosso atendimento!</p>
+  
+      <form id="form-sugestao">
+        <textarea id="mensagem" placeholder="Digite sua sugestão aqui..." required></textarea>
+        <button type="submit">Enviar</button>
+      </form>
+  
+      <div class="comentarios" id="comentarios">
+        <!-- Comentários aparecerão aqui -->
+      </div>
+    </div>
+  </section>
+
+  
+  <!-- ****************************** -->
+
+  <!--   JS SUGESTAO -->
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const form = document.getElementById('form-sugestao');
+      const mensagem = document.getElementById('mensagem');
+      const comentarios = document.getElementById('comentarios');
+  
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+  
+        if (mensagem.value.trim() !== "") {
+          const novaSugestao = document.createElement('div');
+          novaSugestao.classList.add('comentario');
+          novaSugestao.innerText = mensagem.value;
+  
+          comentarios.prepend(novaSugestao); // adiciona no topo
+          mensagem.value = "";
+        }
+      });
+    });
+  </script>
+  
+
+  <!-- FIM SUGESTAO -->
+
+  <!--MAPA-->
+
+  <!-- 5. Endereço + mapa -->
+<div class="footer-endereco">
+  <h3>Endereço</h3>
+  <p><i class="fas fa-map-marker-alt"></i> Rua Solimões, 49</p>
+  <p>Diadema – SP</p>
+
+  <!-- Google Maps embed -->
+  <div class="mapa-wrapper">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3658.123456789!2d-46.6200000!3d-23.7000000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce42345abcde%3A0xfedcba987654321!2sRua%20Solim%C3%B5es%2C%2049%20-%20Diadema%2C%20SP!5e0!3m2!1spt-BR!2sbr!4v1710000000000!5m2!1spt-BR!2sbr"
+      width="600" height="200" style="border:0;" allowfullscreen=""
+      loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</div>
+
+  
+
+
+  <!-- RODAPÉ -->
+<footer class="footer" id="rodape">
+  <div class="footer-container">
+
+    <!-- 1. Logo -->
+    <div class="footer-logo">
+      <img src="./Logo1.0.jpg" alt="Logo Escola Pet">
+    </div>
+
+    <!-- 2. Navegação rápida -->
+    <nav class="footer-nav">
+      <h3>Menu</h3>
+      <ul>
+        <li><a href="#inicio">Início</a></li>
+        <li><a href="#quemsomos">Quem Somos</a></li>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#galeria">Galeria</a></li>
+        <li><a href="#contato">Fale Conosco</a></li>
+      </ul>
+    </nav>
+
+    <!-- 3. Contatos / redes -->
+    <div class="footer-contatos" id="contato">
+      <h3>Contato rápido</h3>
+      <a href="https://wa.me/55XXXXXXXXXXX" class="btn-social whatsapp" target="_blank">
+        <i class="fab fa-whatsapp"></i> WhatsApp
+      </a>
+      <a href="tel:+550000000000" class="btn-social telefone">
+        <i class="fas fa-phone-alt"></i> Ligar
+      </a>
+      <a href="https://instagram.com/sua_pagina" class="btn-social instagram" target="_blank">
+        <i class="fab fa-instagram"></i> Instagram
+      </a>
+      <a href="https://facebook.com/sua_pagina" class="btn-social facebook" target="_blank">
+        <i class="fab fa-facebook-f"></i> Facebook
+      </a>
+    </div>
+
+    <!-- 4. Pagamento -->
+    <div class="footer-pagamentos">
+      <h3>Pagamento</h3>
+      <p><i class="fas fa-credit-card"></i> Crédito</p>
+      <p><i class="fas fa-money-check-alt"></i> Débito</p>
+      <p><i class="fas fa-qrcode"></i> Pix</p>
+    </div>
+    
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>Desenvolvido por WR.Almeida &copy; 2025</p>
+  </div>
+</footer>
+
+
+
+</body>
+</html>
+
+
